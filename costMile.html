@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Cost 1 Mile for the user's car </title>
+</head>
+<body>
+    <h1> Cost 1 Mile for car </h1>
+	<h2>  We help you to find the cost of 1 Mile for 1 car or for 2 cars and to compare these costs </h2>
+    <script>
+    var car = {}; //Created empty object 'car' to store information that will be received from the user
+   
+    var createFullCarObject = function () {  // Created a function to fill object 'car' for car 1 
+    
+	var questionArray = [
+        "costCar", // cost of the user's car
+		"lifeTotalMileage", // the maximum mileage of a car during its lifetime
+		"costGas1Gallon",  //  cost of 1 gallon of gas
+		"mpg", // MPG (miles per 1 gallon) of the user's car
+		"yearsCarLife", // car lifetime in years
+		"yearCostInsurance", // the cost of annual insurance for the car
+		"yearCostMaintenanceRepair", //  the cost of annual  maintenance and repair for the car
+		"yearTaxCar", //  year tax for the car
+        "yearOtherExpenses" // other year expenses for the car 
+		]; // Created an array for the questions that will be asked to the user
+	
+	for (var i = 0; i < questionArray.length; i++) { // user answers on question from array 'questionArray'
+        
+        var carInform = prompt("Please, enter " + questionArray [i] +  " of the vehicle (without any commas and spaces)"); 
+        if (carInform === null) {
+        // Exit
+        break;
+        } if (carInform.length <1) {
+        alert ("Your answer invalid (too short). Try again");
+        break; 
+        
+        }  else {
+           var j = questionArray [i];
+		   car[j] = carInform;
+           }   
+        };
+       return car; 
+    }; 
+    
+    createFullCarObject (); // called a function 'createFullCarObject' with information about the car
+    
+	var car1 = car; // Save information for possible future use (it is not necessary for current program) 
+    
+    var cost = function () { /* Created a function for counting cost of 1 Mile for car 1 */
+    var costLifeGas = (car.lifeTotalMileage * car.costGas1Gallon)/car.mpg;// cost of gas during car's life
+	var costLifeInsurance = car.yearCostInsurance * car.yearsCarLife; // cost of car insurance during car's life
+    var maintanenceLifeRepaire =  car.yearCostMaintenanceRepair * car.yearsCarLife; /* cost of maintenance 
+	and repair during car's life */
+    var taxCar =  car.yearTaxCar * car.yearsCarLife; // cost of tax  during car's life 
+    var otherExpenses =  car.yearOtherExpenses* car.yearsCarLife; /* other expenses during car's life. For example, GPS navigator, 
+	cost of Internet, cell-phone etc */
+    var costLifeTotal = parseInt (car.costCar) + parseInt(costLifeGas) + parseInt(costLifeInsurance) + parseInt(maintanenceLifeRepaire) + parseInt(taxCar) + parseInt(otherExpenses); // total life cost
+    var cost1Mile =  costLifeTotal / car.lifeTotalMileage; // cost of 1 Mile for car
+        return cost1Mile;
+    
+    };
+   
+    var costCar1 = cost(car).toFixed(2); // get the cost of 1 mile for car 1 and round the result to hundredths
+   
+	
+</script>
+ 
+ <script>
+    alert ("Average cost 1 mile for car 1 is $ " +  costCar1 + " .");
+    var otherVariants = confirm ("Do you want to compare cost 1 mile: for car 1 and car 2? If yes - please, click Ok and enter information about car 2");
+     if (otherVariants) { // we suggest the user to enter car2 data
+       var car = {}; // Created empty object 'car' again
+       createFullCarObject (); // called the function to fill object 'car' for car 2
+       cost(); // called the function for counting cost of 1 Mile for car 2
+       var costCar2 = cost(car).toFixed(2); // get the cost of 1 mile for car 1 and round the result to hundredths
+	   alert ("Average cost 1 mile for car 2 is $ " +  costCar2 + " .");
+       
+     };
+
+var car2 = car; //  Save information for possible future use (it is not necessary for current program) 
+</script>
+
+<script>
+        
+   if (costCar1 > costCar2) { // compare the cost of travel by car 1 and car 2
+    alert ("Average cost 1 mile for car 1  ( $ " + costCar1 + " ) more then average cost 1 mile for car 2 ( $ " + costCar2 + " )." );
+   } else {
+     alert ("Average cost 1 mile for car 1  ( $" + costCar1 + " ) less then average cost 1 mile for car 2 ( $ " + costCar2 + " )."); // сравниваем стоимсть 1 мили для автомобиля 1 и 2
+   };
+   alert ("Good luck!"); 
+   
+     </script>
+</body>
+</html>
